@@ -1,3 +1,10 @@
+syntax enable
+set t_Co=256
+
+" Required for Syntastic
+execute pathogen#infect()
+
+
 " Vundle Stuff
 
 set nocompatible              " be iMproved, required
@@ -43,11 +50,9 @@ Plugin 'm2mdas/phpcomplete-extended'
 " YouCompleteMe (autocomplete)
 Plugin 'Valloric/YouCompleteMe'
 
-" Syntastic
-Plugin 'vim-syntastic/syntastic'
-
 " General JS
 Plugin 'pangloss/vim-javascript'
+Plugin 'sheerun/vim-polyglot'
 
 " React JSX
 Plugin 'mxw/vim-jsx'
@@ -60,6 +65,9 @@ if !exists("g:ycm_semantic_triggers")
   let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
+
+" Solidity
+Plugin 'tomlion/vim-solidity'
 
 " Commenting
 Plugin 'scrooloose/nerdcommenter'
@@ -82,8 +90,6 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" disable syntastic on the statusline
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -94,6 +100,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
+au BufNewFile,BufRead *.jsc set filetype=javascript
+
+
 syntax on
 colorscheme monokai
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4
@@ -103,5 +112,5 @@ set backspace=2 " make backspace work like in most other apps
 setlocal autoindent
 setlocal cindent
 setlocal smartindent
-set expandtab
+set expandtab 
 set shiftwidth=4
